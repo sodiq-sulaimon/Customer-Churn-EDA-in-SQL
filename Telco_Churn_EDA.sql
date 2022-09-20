@@ -49,11 +49,11 @@ ORDER BY 2
 
 --Churn by Senior Citizen
 SELECT 
-CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
-	COUNT (SeniorCitizen) AS SeniorCitizen
+	CASE	
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
+		COUNT (SeniorCitizen) AS SeniorCitizen
 FROM kaggle.TelcoChurn
 GROUP BY SeniorCitizen, Churn
 HAVING SeniorCitizen = 1
@@ -61,22 +61,22 @@ HAVING SeniorCitizen = 1
 
 -- Churn by people with partners
 SELECT 
-CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
-	COUNT (Partner) AS HasPartner
+	CASE	
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
+		COUNT (Partner) AS HasPartner
 FROM kaggle.TelcoChurn
 GROUP BY Partner, Churn
 HAVING Partner = 'Yes'
 
 -- Churn by people with dependents
 SELECT 
-CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
-	COUNT (Dependents) AS HasDependents
+	CASE	
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
+		COUNT (Dependents) AS HasDependents
 FROM kaggle.TelcoChurn
 GROUP BY Dependents, Churn
 HAVING Dependents = 'Yes'
@@ -87,11 +87,11 @@ FROM kaggle.TelcoChurn
 
 --Tenure Vs Churn
 SELECT tenure,
-CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status, 
-	COUNT (tenure) AS NumberOfCustomers
+	CASE	
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status, 
+		COUNT (tenure) AS NumberOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY tenure, Churn
 ORDER BY 1,2
@@ -100,7 +100,7 @@ ORDER BY 1,2
 -- CHURN BY SERVICE TYPES
 -- Churn by Service type - Phone Service
 SELECT 
-	 Churn,
+	Churn,
 	COUNT (PhoneService) AS PhoneService
 FROM kaggle.TelcoChurn
 GROUP BY Churn, PhoneService
@@ -130,9 +130,9 @@ ORDER BY 1
 SELECT 
 	OnlineSecurity,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status, 
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status, 
 	COUNT (OnlineSecurity) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, OnlineSecurity
@@ -143,9 +143,9 @@ ORDER BY 1
 SELECT 
 	OnlineBackup,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
 	COUNT (OnlineBackup) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, OnlineBackup
@@ -157,9 +157,9 @@ ORDER BY 1
 SELECT 
 	DeviceProtection,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
 	COUNT (DeviceProtection) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, DeviceProtection
@@ -171,9 +171,9 @@ ORDER BY 1
 SELECT 
 	TechSupport,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
 	COUNT (TechSupport) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, TechSupport
@@ -185,9 +185,9 @@ ORDER BY 1
 SELECT 
 	StreamingTV,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
 	COUNT (StreamingTV) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, StreamingTV
@@ -198,9 +198,9 @@ ORDER BY 1
 SELECT 
 	StreamingMovies,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
 	COUNT (StreamingMovies) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, StreamingMovies
@@ -212,9 +212,9 @@ ORDER BY 1
 SELECT 
 	Contract,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
 	COUNT (Contract) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, Contract
@@ -225,9 +225,9 @@ ORDER BY 1,2
 SELECT 
 	PaperlessBilling,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
 	COUNT (PaperlessBilling) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, PaperlessBilling
@@ -238,9 +238,9 @@ ORDER BY 1,2
 SELECT 
 	PaymentMethod,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
 	COUNT (PaymentMethod) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, PaymentMethod
@@ -251,9 +251,9 @@ ORDER BY 1,2
 SELECT 
 	TotalCharges,
 	CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
+		WHEN Churn = 'Yes' THEN 'Churned'
+		ELSE 'Retained'
+		END AS Status,
 	COUNT (TotalCharges) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, TotalCharges
