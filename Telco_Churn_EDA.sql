@@ -6,18 +6,17 @@ FROM kaggle.TelcoChurn
 SELECT COUNT (DISTINCT customerID) AS TotalCustomers
 FROM kaggle.TelcoChurn
 
--- Distint Churn categories
+-- Distinct Churn categories
 SELECT DISTINCT Churn AS ChurnCat
 FROM kaggle.TelcoChurn
 
 -- Retained Vs Churned Customers (in the last month)
-
 SELECT 
 	CASE	
 		WHEN Churn = 'Yes' THEN 'Churned'
 		ELSE 'Retained'
 		END AS Status,
-	COUNT (*) AS TotalNumber,
+	COUNT (*) AS TotalNumber
 FROM kaggle.TelcoChurn
 GROUP BY Churn
 
@@ -46,7 +45,7 @@ SELECT gender,
 	COUNT (Churn) AS NoOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY gender, Churn
---HAVING Churn = 'Yes'
+ORDER BY 2
 
 --Churn by Senior Citizen
 SELECT 
@@ -58,19 +57,7 @@ CASE
 FROM kaggle.TelcoChurn
 GROUP BY SeniorCitizen, Churn
 HAVING SeniorCitizen = 1
-
--- Payment Method used by Churned SeniorCitizen
-SELECT 
-CASE	
-	WHEN Churn = 'Yes' THEN 'Churned'
-	ELSE 'Retained'
-	END AS Status,
-	COUNT (SeniorCitizen) AS TotalSeniorCitizen,
-	PaymentMethod
-FROM kaggle.TelcoChurn
-GROUP BY SeniorCitizen, Churn, PaymentMethod
-HAVING SeniorCitizen = 1 AND Churn = 'Yes'
-ORDER BY 2 DESC
+-- The churn is quite high for Senior Citizens, we would delve deeper into likely reasons later
 
 -- Churn by people with partners
 SELECT 
@@ -107,8 +94,10 @@ CASE
 	COUNT (tenure) AS NumberOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY tenure, Churn
-ORDER BY 1
+ORDER BY 1,2
+-- The longer the tenure, the less likely it is for a customer to churn
 
+-- CHURN BY SERVICE TYPES
 -- Churn by Service type - Phone Service
 SELECT 
 	 Churn,
@@ -140,7 +129,10 @@ ORDER BY 1
 -- Churn by customers with Online Security
 SELECT 
 	OnlineSecurity,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status, 
 	COUNT (OnlineSecurity) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, OnlineSecurity
@@ -150,7 +142,10 @@ ORDER BY 1
 -- Churn by customers with Online Backup
 SELECT 
 	OnlineBackup,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status,
 	COUNT (OnlineBackup) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, OnlineBackup
@@ -161,27 +156,38 @@ ORDER BY 1
 -- Churn by customers with Device Protection
 SELECT 
 	DeviceProtection,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status,
 	COUNT (DeviceProtection) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, DeviceProtection
 HAVING DeviceProtection NOT LIKE 'No Internet Service'
 ORDER BY 1
+--Customers with Device protection are less likely to churn
 
 -- Churn by customers with Tech Support
 SELECT 
 	TechSupport,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status,
 	COUNT (TechSupport) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, TechSupport
 HAVING TechSupport NOT LIKE 'No Internet Service'
 ORDER BY 1
+--Customers with Tech Support are less likely to churn
 
 -- Churn by customers with Streaming TV
 SELECT 
 	StreamingTV,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status,
 	COUNT (StreamingTV) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, StreamingTV
@@ -191,62 +197,84 @@ ORDER BY 1
 -- Churn by customers with Streaming Movies
 SELECT 
 	StreamingMovies,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status,
 	COUNT (StreamingMovies) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, StreamingMovies
 HAVING StreamingMovies NOT LIKE 'No Internet Service'
-ORDER BY 1
+ORDER BY 1 
+
 
 --Churn by Contract Type
 SELECT 
 	Contract,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status,
 	COUNT (Contract) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, Contract
-ORDER BY 1
+ORDER BY 1,2
+--Longer contract term reduces churn
 
 -- Churn by Billing methods
 SELECT 
 	PaperlessBilling,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status,
 	COUNT (PaperlessBilling) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, PaperlessBilling
-ORDER BY 1
+ORDER BY 1,2
+-- Many customers with Paperless billing churned
 
 -- Churn by Payment methods
 SELECT 
 	PaymentMethod,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status,
 	COUNT (PaymentMethod) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, PaymentMethod
-ORDER BY 1
+ORDER BY 1,2
+-- Many customers who pay with electronic check churned. 
 
 -- Churn by Total Charges
 SELECT 
 	TotalCharges,
-	Churn AS Churned,
+	CASE	
+	WHEN Churn = 'Yes' THEN 'Churned'
+	ELSE 'Retained'
+	END AS Status,
 	COUNT (TotalCharges) AS NumOfCustomers
 FROM kaggle.TelcoChurn
 GROUP BY Churn, TotalCharges
 ORDER BY 1 DESC
+--The charges are unique, soo no definite pattern was found. However, it would be interesting to know why customers with high total charges churned.
 
--- It would be interesting to know why this customer churned
-SELECT *
-FROM kaggle.TelcoChurn
-WHERE TotalCharges = 8684.8
-
--- It would be interesting to know why these customers churned
+-- Let's see if there is a pattern with people who churned and have spent upwards of 7000
 SELECT *
 FROM kaggle.TelcoChurn
 WHERE TotalCharges > 7000 AND Churn = 'Yes'
--- They all have Fibre Optic Internet Service, it is likely that that service is poor
+-- They all have Fibre Optic Internet Service, it is likely that that service is poor or maybe a competitor with better services and/or prices entered the market
 
-
-SELECT TOP (20) *
+-- The popular services with Senior citizens and their payment methods
+SELECT SeniorCitizen, PhoneService, InternetService, Contract, PaymentMethod,
+	COUNT (Churn) AS TotalChurn
 FROM kaggle.TelcoChurn
+GROUP BY SeniorCitizen, PhoneService, InternetService, Contract, PaymentMethod,Churn
+HAVING Churn = 'Yes' AND SeniorCitizen = 1
+ORDER BY 6 DESC
+-- Most churn happened with Senior citizens with Fibre optic internet service, month-to-month contract, and electronic check payment method.
+-- This further underscores our earlier observation about those options
+
 
 
